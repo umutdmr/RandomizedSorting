@@ -1,5 +1,7 @@
 import random
 from input_creator import *
+import sys
+sys.setrecursionlimit(10**6)
 
 def select_random_pivot(lst, low, high):
     pivot_index = random.randint(low, high)
@@ -26,6 +28,3 @@ def quick_sort_version_2(lst, low, high):
         quick_sort_version_2(lst, low, position - 1)
         quick_sort_version_2(lst, position + 1, high)
     return lst
-
-lst = create_input_with_type(n=20,int_type=2)
-print(quick_sort_version_2(lst,0,len(lst)-1))

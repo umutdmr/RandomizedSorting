@@ -1,4 +1,6 @@
 from input_creator import *
+import sys
+sys.setrecursionlimit(10**6)
 
 def partition(lst, low, high):
     pivot = lst[low]
@@ -18,6 +20,3 @@ def quick_sort_version_1(lst, low, high):
         quick_sort_version_1(lst, low, position - 1)
         quick_sort_version_1(lst, position + 1, high)
     return lst
-
-lst = create_input_with_type(n=20,int_type=1)
-print(quick_sort_version_1(lst,0,len(lst)-1))
