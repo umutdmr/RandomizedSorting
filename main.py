@@ -5,12 +5,8 @@ from ver4 import *
 from input_creator import *
 import time
 
-
 all_n=[100, 1000, 10000]
-version_number = 4 #versiyon sayısına göre değiştirilecek
-
-
-f = open("file.txt","w")
+version_number = 4
 
 def execute_list_with_all_versions(lst):
     times=[]
@@ -43,6 +39,8 @@ def get_average_results(lists):
         times[version] = sum([list_time[version] for list_time in list_times])
         times[version] /= len(list_times)
     return times
+
+f = open("file.txt","w")
 
 for n in all_n:
     f.write(f"***n= {n}\n\n")

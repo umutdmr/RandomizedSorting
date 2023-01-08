@@ -1,5 +1,4 @@
 import random
-#from input_creator import *
 import sys
 sys.setrecursionlimit(10**6)
 
@@ -19,8 +18,6 @@ def partition_with_random_pivot(lst, low, high):
         i-=1
     lst[k], lst[low] = lst[low], lst[k]
     return k
-
-
 
 def quick_sort_version_2(lst, low, high):
     if low < high:
