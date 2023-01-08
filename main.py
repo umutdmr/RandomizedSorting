@@ -1,10 +1,13 @@
 from ver1 import *
 from ver2 import *
+from ver3 import *
+from ver4 import *
+from input_creator import *
 import time
 
 
-all_n=[10000]
-version_number = 2 #versiyon sayısına göre değiştirilecek
+all_n=[100, 1000, 10000]
+version_number = 4 #versiyon sayısına göre değiştirilecek
 
 
 f = open("file.txt","w")
@@ -19,6 +22,15 @@ def execute_list_with_all_versions(lst):
     start_time = time.perf_counter() 
     quick_sort_version_2(lst,0,len(lst)-1)
     times.append((time.perf_counter()-start_time)*1e6)
+    
+    start_time = time.perf_counter() 
+    quick_sort_version_3(lst,0,len(lst)-1)
+    times.append((time.perf_counter()-start_time)*1e6)
+    
+    start_time = time.perf_counter() 
+    quick_sort_version_4(lst,0,len(lst)-1)
+    times.append((time.perf_counter()-start_time)*1e6)
+    
 
     return times
 
@@ -33,25 +45,27 @@ def get_average_results(lists):
     return times
 
 for n in all_n:
-    f.write(f"For n = {n}\n")
+    f.write(f"***n= {n}\n\n")
     for int_type in range(1,5):
-        f.write(f"Input Type {int_type}:\n")
+        f.write(f"InpType{int_type}\n")
         avarage_inputs = []
         for i in range(1,6):
             lst = create_input_with_type(n,int_type)
-            f.write(f"Average input {i}:\n")
+            f.write(f"Input{i} (average)= ")
             f.write("-".join(str(x) for x in lst))
             f.write("\n")
             avarage_inputs.append(lst)
         worst_input = create_input_with_type(n,int_type)
         worst_input = quick_sort_version_1(worst_input,0,len(worst_input)-1)
-        f.write(f"Worst input :\n")
+        f.write(f"Input (worst)=")
         f.write("-".join(str(x) for x in worst_input))
-        f.write("\n")
+        f.write("\n\n")
         average_times = get_average_results(avarage_inputs)
         worst_times = execute_list_with_all_versions(worst_input)
         for version in range(1,version_number+1):
-            f.write(f"Version {version} Avarage = {average_times[version-1]}\n")
-            f.write(f"Version {version} Worst = {worst_times[version-1]}\n")
-
+            f.write("Ver{} Average={:.2f} microseconds\n".format(version, average_times[version-1]))
+            f.write("Ver{} Worst={:.2f} microseconds\n".format(version, worst_times[version-1]))
+            
+        f.write("\n")
+    f.write("\n")
 f.close()
